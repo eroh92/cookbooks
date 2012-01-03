@@ -22,10 +22,18 @@
 # are broken...this feels like Rubygems!
 # http://stackoverflow.com/questions/4324558/whats-the-proper-way-to-install-pip-virtualenv-and-distribute-for-python
 # https://bitbucket.org/ianb/pip/issue/104/pip-uninstall-on-ubuntu-linux
+
+python_version = node['python']['version']
+if python_version
+  pip_validation = "pip --version | grep #{python_version.split(/(^\d+\.\d+)/)[1]}" 
+else
+  pip_validation = "which pip"
+end
+
 remote_file "#{Chef::Config[:file_cache_path]}/distribute_setup.py" do
   source "http://python-distribute.org/distribute_setup.py"
   mode "0644"
-  not_if "which pip"
+  not_if pip_validation
 end
 
 bash "install-pip" do
@@ -34,5 +42,5 @@ bash "install-pip" do
   python distribute_setup.py
   easy_install pip
   EOF
-  not_if "which pip"
+  not_if pip_validation
 end
