@@ -55,3 +55,6 @@ end
     action :create
   end
 end
+
+include_recipe "python::installshortcut"
+

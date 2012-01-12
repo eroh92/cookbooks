@@ -1,7 +1,7 @@
 #
 # Author:: Seth Chisamore <schisamo@opscode.com>
 # Cookbook Name:: python
-# Recipe:: default
+# Recipe:: pip
 #
 # Copyright 2011, Opscode, Inc.
 #
@@ -18,7 +18,19 @@
 # limitations under the License.
 #
 
-include_recipe "python::#{node['python']['install_method']}"
-include_recipe "python::pip"
-include_recipe "python::virtualenv"
-include_recipe "python::installshortcut"
+# Ubuntu's python-setuptools, python-pip and python-virtualenv packages 
+# are broken...this feels like Rubygems!
+# http://stackoverflow.com/questions/4324558/whats-the-proper-way-to-install-pip-virtualenv-and-distribute-for-python
+# https://bitbucket.org/ianb/pip/issue/104/pip-uninstall-on-ubuntu-linux
+
+pip_packages = node['python']['packages']
+
+if pip_packages
+  pip_packages.each do |pip,ver|
+    python_pip pip do
+      version ver if ver && ver.length > 0
+      action :install
+    end
+  end
+end
+
