@@ -56,5 +56,5 @@ end
   end
 end
 
-include_recipe "python::installshortcut"
+include_recipe "apt::installshortcut"
 
