@@ -25,12 +25,10 @@
 
 apt_packages = node['apt']['packages']
 
-if apt_packages
-  apt_packages.each do |pkg,ver|
-    package pkg do
-      action :install
-      version ver if ver && ver.length > 0
-    end
+apt_packages.each do |pkg,ver|
+  package pkg do
+    action :install
+    version ver if ver && ver.length > 0
   end
 end
 

@@ -1,7 +1,7 @@
 #
 # Author:: Seth Chisamore <schisamo@opscode.com>
 # Cookbook Name:: python
-# Recipe:: pip
+# Recipe:: installshortcut
 #
 # Copyright 2011, Opscode, Inc.
 #
@@ -25,12 +25,10 @@
 
 pip_packages = node['python']['packages']
 
-if pip_packages
-  pip_packages.each do |pip,ver|
-    python_pip pip do
-      version ver if ver && ver.length > 0
-      action :install
-    end
+pip_packages.each do |pip,ver|
+  python_pip pip do
+    version ver if ver && ver.length > 0
+    action :install
   end
 end
 
