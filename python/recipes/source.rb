@@ -20,6 +20,8 @@
 
 configure_options = node['python']['configure_options'].join(" ")
 
+include_recipe "build-essential"
+
 packages = value_for_platform(
     ["centos","redhat","fedora"] => 
         {"default" => ["openssl-devel","bzip2-devel","zlib-devel","expat-devel","db4-devel","sqlite-devel","ncurses-devel","readline-devel"]},
