@@ -1,6 +1,6 @@
 #
 # Author:: Seth Chisamore (<schisamo@opscode.com>)
-# Cookbook Name:: apt
+# Cookbook Name:: apt 
 # Attribute:: default
 #
 # Copyright 2011, Opscode, Inc.
@@ -19,3 +19,4 @@
 #
 
 default['apt']['packages'] = []
+
